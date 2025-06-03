@@ -1,0 +1,9 @@
+services:
+    rust:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: rust
+      #tty: true
+      #environment:
+      #  - CARGO_TARGET_DIR
