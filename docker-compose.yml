@@ -5,5 +5,10 @@ services:
         dockerfile: Dockerfile
       container_name: rust
       #tty: true
-      #environment:
-      #  - CARGO_TARGET_DIR
+      environment:
+        - EDITOR: /usr/bin/hx
+        - HOME: /root
+        - SHELL: /bin/bash
+      volumes:
+        - ./root:/root:rw
+
