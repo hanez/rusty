@@ -1,9 +1,9 @@
 services:
-    rust:
+    rusty:
       build:
         context: .
         dockerfile: Dockerfile
-      container_name: rust
+      container_name: rusty
       #tty: true
       environment:
         - EDITOR: /usr/bin/hx
