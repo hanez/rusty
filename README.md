@@ -7,5 +7,5 @@
     git clone git@github.com:hanez/rust-docker.git
     cd rust-docker
     docker build -t rusty .
-
+    docker run -it --entrypoint /bin/bash rusty
  
