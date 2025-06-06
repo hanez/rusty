@@ -2,9 +2,9 @@
 
     sudo su -
     cd /home
-    git clone https://github.com/hanez/rust-docker.git
+    git clone https://git.xw3.org/hanez/rust-docker
     or
-    git clone git@github.com:hanez/rust-docker.git
+    git clone git@git.xw3.org:hanez/rust-docker.git
     cd rust-docker
     docker build -t rusty .
     docker run -it --entrypoint /bin/bash rusty
