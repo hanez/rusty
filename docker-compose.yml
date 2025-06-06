@@ -1,10 +1,19 @@
 services:
     rusty:
+      image: rusty
+      entrypoint: /bin/zsh
+      environment:
+        - HOME=/root
+        - SHELL=/bin/zsh
       build:
         context: .
         dockerfile: Dockerfile
       container_name: rusty
-      #tty: true
-      #volumes:
-      #  - ./root:/root:rw
+      stdin_open: true
+      tty: true
+      volumes:
+        - ./home:/home:rw
+        - ./root:/root:rw
+      network_mode: host
+      hostname: rusty
 
