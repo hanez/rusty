@@ -1,4 +1,4 @@
-# My Hack environment in a Docker container
+# My Hack Environment in a Docker Container
 
 The container actually is based on rust:latest which itself is based on Debian (Bookworm). Maybe I will switch to the Debian image, or better switch to an Alpine based image in the future. Actually I prefer the Debian image because it makes it more flexible to me because sometimes I need the GNU libc to compile programs.
 
@@ -18,26 +18,20 @@ My plan is to switch from Docker to native Linux Containers at some time but I a
     mkdir -p home/$USER
     chown $USER:$USER home/$USER
     chmod 0750 home/$USER
-    su
-    # or 
-    sudo su
-    chown root:root home
-    mkdir root
-    chown root:root root
+    sudo chown root:root home
+    sudo mkdir root
+    sudo chown root:root root
 
 ## Configure your environment (Optional)
 
-Optionally you can configure your $HOME directories. I do this by pulling my $HOME config from my Git server. E.g.:
+Optionally you can configure your $HOME directories (/home/$USER and /root). I do this by pulling my $HOME configuration from my Git server. Pulling my $HOME configuration will not work for you because you are not allowed to pull via the Git protocol. This is just an example on how do it... E.g.:
 
-    cd home/hanez
-    git clone git@git.xw3.org:hanez/home.git
-    cd ../..
-    su
-    # or
-    sudo su
-    cd root
-    git clone git@git.xw3.org:hanez/home.git
-    cd ..
+    git clone git@git.xw3.org:hanez/home.git home/hanez/
+    sudo git clone git@git.xw3.org:hanez/home.git root/
+
+I manage these Git based $HOME directories/repositories outside of the container.
+
+If you do not configure your $HOME directories here, the container's defaults will be used.
 
 ## Using docker compose
 
