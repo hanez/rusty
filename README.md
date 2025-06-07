@@ -17,6 +17,7 @@ My plan is to switch from Docker to native Linux Containers at some time but I a
 
     mkdir -p home/$USER
     chown $USER:$USER home/$USER
+    chmod 0750 home/$USER
     su
     # or 
     sudo su
