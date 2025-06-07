@@ -1,8 +1,14 @@
 # My Hack Environment in a Docker Container
 
-The container actually is based on rust:latest which itself is based on Debian (Bookworm). Maybe I will switch to the Debian image, or better switch to an Alpine based image in the future. Actually I prefer the Debian image because it makes it more flexible to me because sometimes I need the GNU libc to compile programs.
+This container image is based on "alpine:3.22".
+
+Why Alpine? Because Alpine Linux is definitely the best Linux based operating system distribution I ever have used since 1999!
 
 Why the name "rusty"? Because it is based on some earlier Docker stuff I made for compiling Rust code... And rusty just sounds cool.
+
+It still includes a full Rust environment/SDK! You need to add "/usr/local/cargo/bin to" your $PATH if you want to make use of it; For user "root" it is done by Docker.
+
+Why Rust? Because I really like this language...
 
 My plan is to switch from Docker to native Linux Containers at some time but I am faster in building the prototype using Docker... ;)
 
@@ -42,7 +48,7 @@ If you do not configure your $HOME directories here, the container's defaults wi
 
     docker compose build
     docker compose up -d
-    docker attach rusty 
+    docker attach rusty
 
 You can stop the container by executing "exit" or by hiting ctrl+c when attached. You can always detache the container when hiting ctrl+p and then ctrl+q. This is useful if you have a screen or a tmux session runningin your container, or maybe some other applications.
 
