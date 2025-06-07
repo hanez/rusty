@@ -6,6 +6,11 @@ Why the name "rusty"? Because it is based on some earlier Docker stuff I made fo
 
 My plan is to switch from Docker to native Linux Containers at some time but I am faster in building the prototype using Docker... ;)
 
+## Prerequisites
+
+ * Docker...! What a wonder... :)
+ * Be sure to be member of the docker group. Else, you need to do all the next steps as user root. I will not cover this here!
+
 ## Get the code
 
     git clone https://git.xw3.org/hanez/rusty
@@ -13,7 +18,7 @@ My plan is to switch from Docker to native Linux Containers at some time but I a
     git clone git@git.xw3.org:hanez/rusty.git (needs an account on git.xw3.org)
     cd rusty
 
-## Prepare environment
+## Prepare the environment
 
     mkdir -p home/$USER
     chown $USER:$USER home/$USER
