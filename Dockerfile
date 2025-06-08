@@ -12,7 +12,7 @@ WORKDIR /root
 # Do this because next steps require some software packages to be installed
 RUN apk add --no-cache alpine-sdk ca-certificates perl
 
-# Install Rust (Copied  from the official Rust Dockerfile)
+# Install Rust (Copied from the official Rust Dockerfile)
 RUN set -eux; \
     apkArch="$(apk --print-arch)"; \
     case "$apkArch" in \
@@ -32,19 +32,17 @@ RUN set -eux; \
     rustc --version;
 
 # Install Rust based applications
-#RUN git clone --branch v0.7.1 --single-branch https://github.com/boxdot/gurk-rs.git gurk; \
-#    cargo build --manifest-path /root/gurk/Cargo.toml --profile release; \
-#    cp /root/gurk/target/release/gurk /usr/bin/
+# ...
 
 # Setup environment
 RUN apk update; \
     apk upgrade --available; \
-    apk add --no-cache bash helix mc openssh shadow tmux vim zsh zsh-vcs neovim
+    apk add --no-cache bash byobu helix mc openssh shadow tmux vim zsh zsh-vcs neovim
 
 RUN chsh -s /bin/zsh root; \
     useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez; \
-    useradd -M -u 1001 -U -s /bin/bash -d /home/test test; \
-    useradd -M -u 1002 -U -s /bin/bash -d /home/test2 test2
+    useradd -M -u 1001 -U -s /bin/bash -d /home/one one; \
+    useradd -M -u 1002 -U -s /bin/zsh -d /home/two two
 
 # This is obsolete since I use docker-compose for managing the container
 ENTRYPOINT ["bash"]
