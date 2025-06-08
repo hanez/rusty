@@ -1,0 +1,32 @@
+FROM rust:latest
+ENV TZ="Europe/Berlin"
+WORKDIR /root
+
+RUN apt install protobuf-compiler
+
+#RUN git clone --branch v1.1.0 --single-branch https://github.com/microsoft/edit.git edit; \
+#    cargo build --manifest-path /home/rust-docker/edit/Cargo.toml --profile dev; \
+#    cp /home/rust-docker/edit/target/release/edit /usr/bin/
+
+#RUN git clone --branch v0.7.1 --single-branch https://github.com/boxdot/gurk-rs.git gurk; \
+#    cargo build --manifest-path /home/rust-docker/gurk/Cargo.toml --profile release; \
+#    cp /home/rust-docker/gurk/target/release/gurk /usr/bin/
+
+RUN git clone --branch 25.01.1 --single-branch https://github.com/helix-editor/helix.git helix; \
+    cargo build --manifest-path /root/helix/Cargo.toml --profile release; \
+    cp /root/helix/target/release/hx /usr/bin/
+
+#RUN git clone --branch v1.0.0 --single-branch https://github.com/FedericoBruzzone/tgt.git tgt; \
+#    cargo build --manifest-path /home/rust-docker/tgt/Cargo.toml --profile release --features download-tdlib; \
+#    cp /home/rust-docker/tgt/target/release/tgt /usr/bin/
+
+RUN apt update -y; \
+    apt dist-upgrade -y; \
+    apt install -y apt-utils build-essential byobu git mc protobuf-compiler tmux vim zsh
+
+RUN chsh -s /bin/zsh root; \
+    useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez; \
+    useradd -M -u 1001 -U -s /bin/bash -d /home/test test
+
+ENTRYPOINT ["bash"]
+
