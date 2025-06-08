@@ -44,6 +44,12 @@ I manage these Git based $HOME directories/repositories outside of the container
 
 If you do not configure your $HOME directories here, the container creates missing configuration files.
 
+### Create SSH key file
+
+Create a private key without a password.
+
+    ssh-keygen -N "" -f home/$USER/.ssh/id_rsa
+
 ## Using docker compose
 
     docker compose build
@@ -51,11 +57,4 @@ If you do not configure your $HOME directories here, the container creates missi
     docker attach rusty
 
 You can stop the container by executing "exit" or by hiting ctrl+c when attached. You can always detache the container when hiting ctrl+p and then ctrl+q. This is useful if you have a screen or a tmux session runningin your container, or maybe some other applications.
-
-## Using the Dockerfile only (less comfortable and without shared directories)
-
-I recommend not to do it this way! You have been warned!
-
-    docker build -t rusty .
-    docker run -it --entrypoint /bin/bash rusty
 
