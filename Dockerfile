@@ -13,8 +13,8 @@ WORKDIR .
 # Do this because next steps require some software packages to be installed
 RUN apk add --no-cache alpine-sdk ca-certificates perl
 
+# Use without volumes in the compose file only!
 #RUN git clone https://git.xw3.org/hanez/home.git /root
-
 #COPY root/.ssh /root/.ssh
 
 # Install Rust (Copied from the official Rust Dockerfile)
@@ -37,37 +37,34 @@ RUN \
     cargo --version; \
     rustc --version;
 
-# Install Rust based applications
-# ...
-
 # Setup environment
 RUN \
-    apk update;\
-    apk upgrade --available;\
+    apk update; \
+    apk upgrade --available; \
     apk add --no-cache bash byobu git helix mc openssh shadow tmux vim zsh zsh-vcs neovim
 
 WORKDIR /home/hanez
 
+# Use without volumes in the compose file only!
 #RUN git clone https://git.xw3.org/hanez/home.git .
-
 #COPY home/hanez/.ssh /home/hanez/.ssh
 
 RUN \
     chsh -s /bin/zsh root
 
 RUN \
-    useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez;\
-    touch /home/hanez/.penv;\
+    useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez; \
+    touch /home/hanez/.penv; \
     chown -R 1000:1000 /home/hanez
 
 WORKDIR .
 
 RUN \
-    useradd -M -u 1001 -U -s /bin/bash -d /home/one one;\
+    useradd -M -u 1001 -U -s /bin/bash -d /home/one one; \
     useradd -M -u 1002 -U -s /bin/ash -d /home/two two
 
-RUN mkdir /home/xxx
+RUN mkdir /home/rusty
 
 # This is obsolete since I use docker-compose for managing the container
-ENTRYPOINT ["ash"]
+ENTRYPOINT ["sh"]
 
