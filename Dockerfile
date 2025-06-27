@@ -1,4 +1,5 @@
-FROM alpine:3.22
+FROM alpine:latest
+#FROM rust:alpine
 
 ENV \
     CARGO_HOME=/usr/local/cargo \
@@ -7,10 +8,14 @@ ENV \
     RUSTUP_HOME=/usr/local/rustup \
     TZ="Europe/Berlin"
 
-WORKDIR /root
+WORKDIR .
 
 # Do this because next steps require some software packages to be installed
 RUN apk add --no-cache alpine-sdk ca-certificates perl
+
+#RUN git clone https://git.xw3.org/hanez/home.git /root
+
+#COPY root/.ssh /root/.ssh
 
 # Install Rust (Copied from the official Rust Dockerfile)
 RUN \
@@ -37,16 +42,32 @@ RUN \
 
 # Setup environment
 RUN \
-    apk update; \
-    apk upgrade --available; \
-    apk add --no-cache bash byobu helix mc openssh shadow tmux vim zsh zsh-vcs neovim
+    apk update;\
+    apk upgrade --available;\
+    apk add --no-cache bash byobu git helix mc openssh shadow tmux vim zsh zsh-vcs neovim
+
+WORKDIR /home/hanez
+
+#RUN git clone https://git.xw3.org/hanez/home.git .
+
+#COPY home/hanez/.ssh /home/hanez/.ssh
 
 RUN \
-    chsh -s /bin/zsh root; \
-    useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez; \
-    useradd -M -u 1001 -U -s /bin/bash -d /home/one one; \
+    chsh -s /bin/zsh root
+
+RUN \
+    useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez;\
+    touch /home/hanez/.penv;\
+    chown -R 1000:1000 /home/hanez
+
+WORKDIR .
+
+RUN \
+    useradd -M -u 1001 -U -s /bin/bash -d /home/one one;\
     useradd -M -u 1002 -U -s /bin/ash -d /home/two two
 
+RUN mkdir /home/xxx
+
 # This is obsolete since I use docker-compose for managing the container
-ENTRYPOINT ["bash"]
+ENTRYPOINT ["ash"]
 

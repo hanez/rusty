@@ -24,7 +24,7 @@ My plan is to switch from Docker to native Linux Containers at some time but I a
     git clone git@git.xw3.org:hanez/rusty.git # (needs an account on git.xw3.org)
     cd rusty
 
-## Prepare the environment
+## Prepare the environment (This is totally wrong! Give me some time... ;))
 
     mkdir -p home/$USER
     chown $USER:$USER home/$USER
@@ -48,7 +48,7 @@ If you do not configure your $HOME directories here, the container creates missi
 
 Create a private key without a password.
 
-    ssh-keygen -N "" -f home/$USER/.ssh/id_rsa
+    ssh-keygen -N "" -f home/$USER/.ssh/ed25519
 
 ## Using docker compose
 
