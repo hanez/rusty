@@ -45,12 +45,12 @@ RUN \
 
 WORKDIR /home/hanez
 
+RUN \
+    chsh -s /bin/zsh root
+
 # Use without volumes in the compose file only!
 #RUN git clone https://git.xw3.org/hanez/home.git .
 #COPY home/hanez/.ssh /home/hanez/.ssh
-
-RUN \
-    chsh -s /bin/zsh root
 
 RUN \
     useradd -M -u 1000 -U -s /bin/zsh -d /home/hanez hanez; \
